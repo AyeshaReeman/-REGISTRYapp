@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ef">
+  <title>Your account | Registry</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="home-page">
+  <header class="site-header">
+    <div class="site-header-inner">
+      <a class="wordmark" href="/home" aria-label="Registry home"><span class="wordmark-mark">R</span>
+        <span>registry</span>
+      </a>
+      <div class="header-actions">
+        <span class="header-label">Your account</span>
+        <form action="/logout" method="POST">
+          <button class="button button--quiet" type="submit">Sign out</button>
+        </form>
+      </div>
+    </div>
+  </header>
+
+  <main class="home-main">
+    <section class="welcome-block">
+      <p class="eyebrow">Account overview</p>
+      <h1>Good to have you here<% if (user && user.fullname) { %>, <span><%= user.fullname %>
+      </span><% } %>.</h1>
+      <p class="welcome-copy">Your Registry account details, together in one place.</p>
+    </section>
+
+    <section class="account-card" aria-labelledby="account-heading">
+      <div class="account-card-top">
+        <div>
+          <p class="eyebrow">Personal details</p>
+          <h2 id="account-heading">Your profile</h2>
+        </div>
+        <span class="status-label"> 
+          <span class="status-dot" aria-hidden="true">
+
+          </span>Account active</span>
+        </div>
+      <div class="profile-summary">
+        <% if (user && user.profileImage && user.profileImage.data && user.profileImage.contentType) { %>
+          <img class="profile-avatar" src="data:<%= user.profileImage.contentType %>;base64,<%= user.profileImage.data %>" alt="Profile photo for <%= user.fullname || 'your account' %>">
+        <% } 
+        else { %>
+          <div class="profile-avatar profile-avatar--fallback" aria-label="No profile photo">
+             <span>
+              <%= (user && user.fullname ? user.fullname.trim().charAt(0) : 'R').toUpperCase() %>
+            </span>
+            </div>
+        <% } %>
+        <div class="profile-name">
+          <h3>
+          <%= user && user.fullname ? user.fullname : 'Registry member' %>
+        </h3>
+          <p>Registry member</p>
+        </div>
+      </div>
+      <div class="detail-list">
+        <div class="detail-row"><div class="detail-label">Full name</div><div class="detail-value"><%= user && user.fullname ? user.fullname : 'Not provided' %></div> 
+      </div>
+        <div class="detail-row"><div class="detail-label">Email address</div>
+        <div class="detail-value"><%= user && user.email ? user.email : 'Not provided' %></div>
+      </div>
+        <% if (user && user.createdAt) { %>
+          <div class="detail-row">
+            <div class="detail-label">Member since</div>
+            <div class="detail-value"><%= new Date(user.createdAt).toLocaleDateString('en', { year: 'numeric', month: 'long', day: 'numeric' }) %></div>
+          </div>
+        <% } %>
+      </div>
+      <div class="account-card-footer">
+        <p>Your sign-in details are private and are not displayed here.</p>
+        <form action="/logout" method="POST">
+          <button class="button button--primary" type="submit">Sign out of Registry</button>
+        </form>
+      </div>
+    </section>
+    <footer class="home-footer">
+      <span>Registry</span>
+      <span>Personal information, kept simple.</span>
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ef">
+  <title>Sign in | Registry</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-page">
+  <main class="auth-shell auth-shell--login">
+    <section class="brand-panel" aria-label="Registry introduction">
+      <a class="wordmark" href="/login" aria-label="Registry home"><span class="wordmark-mark">R</span>
+        <span>registry</span>
+      </a>
+      <div class="brand-copy">
+        <p class="eyebrow">A place to begin</p>
+        <h1>Your details.<br>In good order.</h1>
+        <p class="brand-description">A quieter, more considered way to keep your account information together.</p>
+      </div>
+      <p class="panel-note">Simple by design. Yours to manage.</p>
+    </section>
+
+    <section class="form-panel" aria-labelledby="page-title">
+      <div class="form-wrap">
+        <p class="eyebrow form-eyebrow">Welcome back</p>
+        <h2 id="page-title">Sign in to Registry</h2>
+        <p class="form-intro">Use your email and password to continue.</p>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="notice notice--error" role="alert" aria-live="polite"><span class="notice-marker" aria-hidden="true"></span><span><%= error %></span></div>
+        <% } %>
+
+        <form action="/login" method="POST" class="form-stack" novalidate data-validate>
+          <div class="field">
+            <label for="email">Email address <span class="required-note">Required</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required maxlength="254" aria-describedby="email-help">
+            <p class="field-hint" id="email-help">Use the email address linked to your account.</p>
+          </div>
+          <div class="field">
+            <label for="password">Password <span class="required-note">Required</span></label>
+            <div class="password-control">
+              <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" required>
+              <button class="reveal-button" type="button" data-password-toggle="password" aria-pressed="false">Show</button>
+            </div>
+          </div>
+          <p class="form-feedback" data-form-feedback aria-live="polite"></p>
+          <button class="button button--primary" type="submit">Sign in</button>
+        </form>
+        <p class="form-switch">New to Registry? <a href="/signup">Create an account</a></p>
+        <p class="legal-note">By continuing, you are accessing your personal account.</p>
+      </div>
+    </section>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>

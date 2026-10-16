@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ef">
+  <title>Create account | Registry</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body class="auth-page auth-page--signup">
+  <main class="auth-shell auth-shell--signup">
+    <section class="brand-panel brand-panel--compact" aria-label="Registry introduction">
+      <a class="wordmark" href="/login" aria-label="Registry home"><span class="wordmark-mark">R</span><span>registry</span></a>
+      <div class="brand-copy">
+        <p class="eyebrow">Make it yours</p>
+        <h1>A clear start<br>for what comes next.</h1>
+        <p class="brand-description">Create your account with the essentials. You can keep your profile simple and add a photo if you like.</p>
+      </div>
+      <p class="panel-note">Your account, organized around you.</p>
+    </section>
+
+    <section class="form-panel form-panel--signup" aria-labelledby="page-title">
+      <div class="form-wrap form-wrap--wide">
+        <p class="eyebrow form-eyebrow">Create your account</p>
+        <h2 id="page-title">Get started with Registry</h2>
+        <p class="form-intro">Fields marked required are needed to create your account.</p>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+          <div class="notice notice--error" role="alert" aria-live="polite"><span class="notice-marker" aria-hidden="true"></span><span><%= error %></span></div>
+        <% } %>
+
+        <form action="/signup" method="POST" enctype="multipart/form-data" class="form-stack form-stack--signup" novalidate data-validate>
+          <div class="field">
+            <label for="fullname">Full name <span class="required-note">Required</span></label>
+            <input id="fullname" name="fullname" type="text" autocomplete="name" placeholder="Your full name" required maxlength="120">
+          </div>
+          <div class="field">
+            <label for="email">Email address <span class="required-note">Required</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required maxlength="254">
+          </div>
+          <div class="field">
+            <label for="password">Create password <span class="required-note">Required</span></label>
+            <div class="password-control">
+              <input id="password" name="password" type="password" autocomplete="new-password" placeholder="At least 8 characters" minlength="8" required aria-describedby="password-help">
+              <button class="reveal-button" type="button" data-password-toggle="password" aria-pressed="false">Show</button>
+            </div>
+            <p class="field-hint" id="password-help">Use at least 8 characters.</p>
+          </div>
+          <div class="field">
+            <label for="confirmPassword">Confirm password <span class="required-note">Required</span></label>
+            <div class="password-control">
+              <input id="confirmPassword" name="confirmPassword" type="password" autocomplete="new-password" placeholder="Enter your password again" required data-confirm-password>
+              <button class="reveal-button" type="button" data-password-toggle="confirmPassword" aria-pressed="false">Show</button>
+            </div>
+            <p class="field-hint" data-confirm-hint>Enter the same password in both fields.</p>
+          </div>
+          <div class="field field--upload">
+            <div class="upload-heading"><label for="profileImage">Profile photo <span class="optional-note">Optional</span></label><span class="upload-meta">JPG, PNG or WebP</span></div>
+            <div class="upload-control">
+              <div class="image-preview" data-image-preview aria-hidden="true"><span class="preview-initial">+</span></div>
+              <div class="upload-copy"><input id="profileImage" name="profileImage" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="upload-help"><p class="field-hint" id="upload-help">Choose a photo up to 2 MB. You can skip this for now.</p></div>
+            </div>
+          </div>
+          <p class="form-feedback" data-form-feedback aria-live="polite"></p>
+          <button class="button button--primary" type="submit">Create account</button>
+        </form>
+        <p class="form-switch">Already have an account? <a href="/login">Sign in</a></p>
+      </div>
+    </section>
+  </main>
+  <script src="/app.js" defer></script>
+</body>
+</html>
